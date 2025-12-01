@@ -4,49 +4,56 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (_) => ContainerConfig(),
+      create: (_) => CornerConfig(),
       child: const MyApp(),
     ),
   );
 }
 
-/// ----- МОДЕЛЬ СТАНУ ДЛЯ PROVIDER -----
-class ContainerConfig extends ChangeNotifier {
-  double _width = 150;
-  double _height = 150;
-  double _topRightRadius = 20;
+/// ===== МОДЕЛЬ СТАНУ ДЛЯ КУТІВ КОНТЕЙНЕРА =====
+class CornerConfig extends ChangeNotifier {
+  double _topLeft = 20;
+  double _topRight = 20;
+  double _bottomLeft = 20;
+  double _bottomRight = 20;
 
-  double get width => _width;
-  double get height => _height;
-  double get topRightRadius => _topRightRadius;
+  double get topLeft => _topLeft;
+  double get topRight => _topRight;
+  double get bottomLeft => _bottomLeft;
+  double get bottomRight => _bottomRight;
 
-  void setWidth(double value) {
-    _width = value;
+  void setTopLeft(double value) {
+    _topLeft = value;
     notifyListeners();
   }
 
-  void setHeight(double value) {
-    _height = value;
+  void setTopRight(double value) {
+    _topRight = value;
     notifyListeners();
   }
 
-  void setTopRightRadius(double value) {
-    _topRightRadius = value;
+  void setBottomLeft(double value) {
+    _bottomLeft = value;
+    notifyListeners();
+  }
+
+  void setBottomRight(double value) {
+    _bottomRight = value;
     notifyListeners();
   }
 }
 
-/// ----- ROOT-ВІДЖЕТ -----
+/// ===== ROOT-ВІДЖЕТ =====
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Lab 11 Provider',
+      title: 'Lab 11 Variant 2',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const ConfigScreen(),
@@ -54,7 +61,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// ----- ГОЛОВНИЙ ЕКРАН -----
+/// ===== ГОЛОВНИЙ ЕКРАН =====
 class ConfigScreen extends StatelessWidget {
   const ConfigScreen({super.key});
 
@@ -62,24 +69,20 @@ class ConfigScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Container configurator'),
+        title: const Text('Blue container configurator'),
         centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          children: [
-            // прев'ю контейнера
-            const Expanded(
+          children: const [
+            Expanded(
               child: Center(
-                child: RedContainerPreview(),
+                child: BlueContainerPreview(),
               ),
             ),
-
-            const SizedBox(height: 24),
-
-            // секція зі слайдерами
-            const SliderSection(),
+            SizedBox(height: 24),
+            SliderSection(),
           ],
         ),
       ),
@@ -87,66 +90,79 @@ class ConfigScreen extends StatelessWidget {
   }
 }
 
-/// ----- КАСТОМНИЙ ВІДЖЕТ: ЧЕРВОНИЙ КОНТЕЙНЕР -----
-class RedContainerPreview extends StatelessWidget {
-  const RedContainerPreview({super.key});
+/// ===== КАСТОМНИЙ ВІДЖЕТ: СИНІЙ КОНТЕЙНЕР =====
+class BlueContainerPreview extends StatelessWidget {
+  const BlueContainerPreview({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final config = context.watch<ContainerConfig>();
+    final config = context.watch<CornerConfig>();
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      width: config.width,
-      height: config.height,
+      width: 150,
+      height: 150,
       decoration: BoxDecoration(
-        color: Colors.red,
+        color: Colors.blue,
         borderRadius: BorderRadius.only(
-          topRight: Radius.circular(config.topRightRadius),
+          topLeft: Radius.circular(config.topLeft),
+          topRight: Radius.circular(config.topRight),
+          bottomLeft: Radius.circular(config.bottomLeft),
+          bottomRight: Radius.circular(config.bottomRight),
         ),
       ),
     );
   }
 }
 
-/// ----- КАСТОМНИЙ ВІДЖЕТ: СЕКЦІЯ ЗІ СЛАЙДЕРАМИ -----
+/// ===== КАСТОМНИЙ ВІДЖЕТ: СЕКЦІЯ ЗІ СЛАЙДЕРАМИ =====
 class SliderSection extends StatelessWidget {
   const SliderSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final config = context.watch<ContainerConfig>();
+    final config = context.watch<CornerConfig>();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Width: ${config.width.toStringAsFixed(0)}'),
-        Slider(
-          min: 50,
-          max: 300,
-          value: config.width,
-          onChanged: (value) =>
-              context.read<ContainerConfig>().setWidth(value),
-        ),
-        const SizedBox(height: 12),
-
-        Text('Height: ${config.height.toStringAsFixed(0)}'),
-        Slider(
-          min: 50,
-          max: 300,
-          value: config.height,
-          onChanged: (value) =>
-              context.read<ContainerConfig>().setHeight(value),
-        ),
-        const SizedBox(height: 12),
-
-        Text('Top-right radius: ${config.topRightRadius.toStringAsFixed(0)}'),
+        Text('Top-left radius: ${config.topLeft.toStringAsFixed(0)}'),
         Slider(
           min: 0,
-          max: 150,
-          value: config.topRightRadius,
+          max: 75,
+          value: config.topLeft,
           onChanged: (value) =>
-              context.read<ContainerConfig>().setTopRightRadius(value),
+              context.read<CornerConfig>().setTopLeft(value),
+        ),
+        const SizedBox(height: 12),
+
+        Text('Top-right radius: ${config.topRight.toStringAsFixed(0)}'),
+        Slider(
+          min: 0,
+          max: 75,
+          value: config.topRight,
+          onChanged: (value) =>
+              context.read<CornerConfig>().setTopRight(value),
+        ),
+        const SizedBox(height: 12),
+
+        Text('Bottom-left radius: ${config.bottomLeft.toStringAsFixed(0)}'),
+        Slider(
+          min: 0,
+          max: 75,
+          value: config.bottomLeft,
+          onChanged: (value) =>
+              context.read<CornerConfig>().setBottomLeft(value),
+        ),
+        const SizedBox(height: 12),
+
+        Text('Bottom-right radius: ${config.bottomRight.toStringAsFixed(0)}'),
+        Slider(
+          min: 0,
+          max: 75,
+          value: config.bottomRight,
+          onChanged: (value) =>
+              context.read<CornerConfig>().setBottomRight(value),
         ),
       ],
     );
