@@ -10,19 +10,11 @@ void main() {
   );
 }
 
-<<<<<<< HEAD
 /// ----- МОДЕЛЬ СТАНУ ДЛЯ PROVIDER -----
 class ContainerConfig extends ChangeNotifier {
   double _width = 150;
   double _height = 150;
   double _topRightRadius = 20;
-=======
-class CornerConfig extends ChangeNotifier {
-  double _topLeft = 20;
-  double _topRight = 20;
-  double _bottomLeft = 20;
-  double _bottomRight = 20;
->>>>>>> f91abb137a6762cee09e1af153e6cebe7c49aa90
 
   double get width => _width;
   double get height => _height;
@@ -44,10 +36,7 @@ class CornerConfig extends ChangeNotifier {
   }
 }
 
-<<<<<<< HEAD
 /// ----- ROOT-ВІДЖЕТ -----
-=======
->>>>>>> f91abb137a6762cee09e1af153e6cebe7c49aa90
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -65,10 +54,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-<<<<<<< HEAD
 /// ----- ГОЛОВНИЙ ЕКРАН -----
-=======
->>>>>>> f91abb137a6762cee09e1af153e6cebe7c49aa90
 class ConfigScreen extends StatelessWidget {
   const ConfigScreen({super.key});
 
@@ -101,14 +87,9 @@ class ConfigScreen extends StatelessWidget {
   }
 }
 
-<<<<<<< HEAD
 /// ----- КАСТОМНИЙ ВІДЖЕТ: ЧЕРВОНИЙ КОНТЕЙНЕР -----
 class RedContainerPreview extends StatelessWidget {
   const RedContainerPreview({super.key});
-=======
-class BlueContainerPreview extends StatelessWidget {
-  const BlueContainerPreview({super.key});
->>>>>>> f91abb137a6762cee09e1af153e6cebe7c49aa90
 
   @override
   Widget build(BuildContext context) {
@@ -128,10 +109,7 @@ class BlueContainerPreview extends StatelessWidget {
   }
 }
 
-<<<<<<< HEAD
 /// ----- КАСТОМНИЙ ВІДЖЕТ: СЕКЦІЯ ЗІ СЛАЙДЕРАМИ -----
-=======
->>>>>>> f91abb137a6762cee09e1af153e6cebe7c49aa90
 class SliderSection extends StatelessWidget {
   const SliderSection({super.key});
 
