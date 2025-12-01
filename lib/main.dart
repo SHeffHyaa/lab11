@@ -10,7 +10,6 @@ void main() {
   );
 }
 
-/// ===== МОДЕЛЬ СТАНУ ДЛЯ КУТІВ КОНТЕЙНЕРА =====
 class CornerConfig extends ChangeNotifier {
   double _topLeft = 20;
   double _topRight = 20;
@@ -43,7 +42,6 @@ class CornerConfig extends ChangeNotifier {
   }
 }
 
-/// ===== ROOT-ВІДЖЕТ =====
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -61,7 +59,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// ===== ГОЛОВНИЙ ЕКРАН =====
 class ConfigScreen extends StatelessWidget {
   const ConfigScreen({super.key});
 
@@ -90,7 +87,6 @@ class ConfigScreen extends StatelessWidget {
   }
 }
 
-/// ===== КАСТОМНИЙ ВІДЖЕТ: СИНІЙ КОНТЕЙНЕР =====
 class BlueContainerPreview extends StatelessWidget {
   const BlueContainerPreview({super.key});
 
@@ -115,7 +111,6 @@ class BlueContainerPreview extends StatelessWidget {
   }
 }
 
-/// ===== КАСТОМНИЙ ВІДЖЕТ: СЕКЦІЯ ЗІ СЛАЙДЕРАМИ =====
 class SliderSection extends StatelessWidget {
   const SliderSection({super.key});
 
